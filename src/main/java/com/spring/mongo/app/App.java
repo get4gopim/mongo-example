@@ -13,7 +13,8 @@ public class App
 
 		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring/app-context.xml");
         HelloMongo hello = context.getBean(HelloMongo.class);
-        hello.run();
+        //hello.run();
+        hello.execute();
         
         System.out.println( "DONE!" );
 	}

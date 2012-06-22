@@ -1,5 +1,7 @@
 package com.spring.mongo.domain;
 
+import java.math.BigInteger;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -7,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Movie {
 
 	@Id
-	private String id;
+	private BigInteger id;
 
 	private String title;
 	
@@ -42,11 +44,11 @@ public class Movie {
 		this.flimDirector = flimDirector;
 	}
 
-	public String getId() {
+	public BigInteger getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(BigInteger id) {
 		this.id = id;
 	}
 

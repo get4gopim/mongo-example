@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.repository.core.EntityInformation;
 import org.springframework.data.repository.core.RepositoryMetadata;
@@ -128,6 +130,18 @@ public class HelloMongo {
 			System.out.println("\n");
 		}
 		
+	}
+	
+	public static void main( String[] args ) {
+		System.out.println("Bootstrapping HelloMongo");
+
+		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring/app-context.xml");
+        HelloMongo hello = context.getBean(HelloMongo.class);
+        //hello.run();
+        hello.execute();
+        //hello.insertData();
+        
+        System.out.println( "DONE!" );
 	}
 
 }

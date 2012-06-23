@@ -8,8 +8,24 @@
     http://www.springframework.org/schema/data/mongo
     http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd">
 
-  <mongo:repositories base-package="com.spring.mongo.repository" />
+	<!-- Repository scannning -->
+  	<mongo:repositories base-package="com.spring.mongo.repository" />
   
-  <context:component-scan base-package="com.spring.mongo"></context:component-scan>
+    <!-- HelloMongo and other bean scanning  -->
+  	<context:component-scan base-package="com.spring.mongo"></context:component-scan>
+  	
+  	<!-- Creating database and mongo connection thru template -->
+  	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+	     <constructor-arg name="mongo" ref="mongo"/>
+	     <constructor-arg name="databaseName" value="test"/>
+    </bean>
+    
+    <!-- Factory bean that creates the Mongo instance -->
+    <bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean">
+     	<property name="host" value="localhost"/>
+    </bean>
+    
+    <!-- Use this post processor to translate any MongoExceptions thrown in @Repository annotated classes -->
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
 </beans>

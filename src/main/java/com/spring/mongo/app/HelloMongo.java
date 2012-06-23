@@ -20,17 +20,17 @@ import com.spring.mongo.repository.MovieRepository;
 public class HelloMongo {
 
 	@Autowired
-	MongoOperations mongoOperations;
+	private MongoOperations mongoOperations;
 	
 	@Autowired
-	MovieRepository movieRepository;
+	private MovieRepository movieRepository;
 
-	public void run() {
+	private void run() {
 
 		if (mongoOperations.collectionExists(Movie.class)) {
 			mongoOperations.dropCollection(Movie.class);
+			mongoOperations.createCollection(Movie.class);
 		}
-		mongoOperations.createCollection(Movie.class);
 
 		Movie m1 = new Movie("Endhiran", "BluRay", true, "Rajinikanth", "Aishwarya Rai", "AR Rahman", "Shankar");
 		Movie m2 = new Movie("Ayyan", "BluRay", true, "Surya", "Aishwarya Rai", "Harris Jayaraj", "Sun");
@@ -47,6 +47,38 @@ public class HelloMongo {
 		mongoOperations.insert(m6);
 
 		List<Movie> results = mongoOperations.findAll(Movie.class);
+		for (Movie m:results) {
+			System.out.println("===============================================");
+			System.out.println("Title: " + m.getTitle());
+			System.out.println("Music By: " + m.getMusicDirector());
+			System.out.println("Direction By: " + m.getFlimDirector());
+		}
+		
+		
+	}
+	
+	public void insertData() {
+
+		/*if (mongoOperations.collectionExists(Movie.class)) {
+			mongoOperations.dropCollection(Movie.class);
+			mongoOperations.createCollection(Movie.class);
+		}*/		
+
+		Movie m1 = new Movie("Endhiran", "BluRay", true, "Rajinikanth", "Aishwarya Rai", "AR Rahman", "Shankar");
+		Movie m2 = new Movie("Ayyan", "BluRay", true, "Surya", "Aishwarya Rai", "Harris Jayaraj", "Sun");
+		Movie m3 = new Movie("Roja", "BluRay", true, "Rajinikanth", "Aishwarya Rai", "AR Rahman", "Manirathnam");
+		Movie m4 = new Movie("Nanban", "BluRay", true, "Vijay", "Illena", "Harris Jayaraj", "Shankar");
+		Movie m5 = new Movie("Bombay", "BluRay", true, "Aravindsamy", "Manisha", "AR Rahman", "Manirathnam");
+		Movie m6 = new Movie("Ayya", "DVD", true, "Sarathkumar", null, "", null);
+		
+		movieRepository.save(m1);
+		movieRepository.save(m2);
+		movieRepository.save(m3);
+		movieRepository.save(m4);
+		movieRepository.save(m5);
+		movieRepository.save(m6);
+
+		List<Movie> results = (List<Movie>) movieRepository.findAll();
 		for (Movie m:results) {
 			System.out.println("===============================================");
 			System.out.println("Title: " + m.getTitle());

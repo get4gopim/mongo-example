@@ -8,9 +8,6 @@
     http://www.springframework.org/schema/data/mongo
     http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd">
 
-  <bean id="helloMongo" class="com.spring.mongo.app.HelloMongo">
-  </bean>
-
   <mongo:repositories base-package="com.spring.mongo.repository" />
   
   <context:component-scan base-package="com.spring.mongo"></context:component-scan>

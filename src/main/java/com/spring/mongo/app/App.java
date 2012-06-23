@@ -15,6 +15,7 @@ public class App
         HelloMongo hello = context.getBean(HelloMongo.class);
         //hello.run();
         hello.execute();
+        //hello.insertData();
         
         System.out.println( "DONE!" );
 	}

@@ -90,6 +90,46 @@
 			<artifactId>spring-aop</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		
+		<!-- SPRING restTemplate -->
+
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-webmvc</artifactId>
+    	<version>3.0.5.RELEASE</version>
+    	<type>jar</type>
+    	<scope>compile</scope>
+    </dependency>
+		
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-oxm</artifactId>
+    	<version>3.0.5.RELEASE</version>
+    	<type>jar</type>
+    	<scope>compile</scope>
+    </dependency>
+    
+    <dependency>
+            <groupId>org.codehaus.castor</groupId>
+            <artifactId>castor</artifactId>
+            <version>1.2</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>2.9.1</version>
+        </dependency>
+    
+    
+    <dependency>
+		<groupId>com.thoughtworks.xstream</groupId>
+		<artifactId>xstream</artifactId>
+		<version>1.3.1</version>
+	</dependency>
+	
+	<!-- OTEHRS -->
+		
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib</artifactId>

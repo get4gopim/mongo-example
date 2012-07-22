@@ -27,5 +27,59 @@
     
     <!-- Use this post processor to translate any MongoExceptions thrown in @Repository annotated classes -->
 	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
-
+	
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+		<property name="messageConverters">
+			<list>
+				<!--<ref bean="xtreamMarshallerConverter" />
+				 <ref bean="castorMarshallerConverter" />-->
+				 <ref bean="jaxbMarshallerConverter" />
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- We only have one message converter for the RestTemplate, namely the XStream Marshller -->
+	<bean id="xtreamMarshallerConverter" class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+		<constructor-arg>
+			<bean class="org.springframework.oxm.xstream.XStreamMarshaller">
+				<!-- Explicitly define the aliases -->
+				
+				<property name="aliases">
+					<props>
+						<prop key="movie">com.spring.mongo.app.IMDBMovie</prop>
+					</props>
+				</property>
+				
+				
+				<!-- Tell XStream to find the alias names in the following classes -->
+				<property name="annotatedClasses">
+					<list>
+						<value>com.spring.mongo.app.IMDBMovie</value>							
+					</list>						
+				</property>
+			</bean>
+		</constructor-arg>
+	</bean>
+	
+	 			
+	<bean id="castorMarshallerConverter" class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+	  <property name="marshaller" ref="castorMarshaller" />
+	  <property name="unmarshaller" ref="castorMarshaller" />
+	</bean>
+	
+	<bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller">
+	</bean>
+	
+	<bean id="jaxbMarshallerConverter" class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+	  <property name="marshaller" ref="jaxbMarshaller" />
+	  <property name="unmarshaller" ref="jaxbMarshaller" />
+	</bean>
+	
+	<bean id="jaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <property name="classesToBeBound" value="com.spring.mongo.app.IMDBMovie" />
+    </bean>
+	
+ 	
+ 	
 </beans>
